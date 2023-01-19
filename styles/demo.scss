@@ -1,7 +1,55 @@
-// reset code for browsers
+/* declaration of variables */
+// background colors
+$header-background: #3a86ff;
+$main-background: #8338ec;
+$footer-background: #ff006e;
 
+// paragraph font size
+$paragraph-font-size: 16px;
+
+// reset code for browsers
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+header{
+    background: $header-background;
+}
+
+nav{
+    margin-top: 20px;
+    ul{
+        list-style-type: none;
+        li{
+            display: inline-block;
+            margin: 0 15px;
+            a{
+                display: inline-block;
+                color: white;
+                text-decoration: none;
+                padding: 10px;
+                transition: 0.4s;
+                border-radius: 5px;
+            }
+
+            a:hover{
+                background: #fb5607;
+            }
+        }
+    }
+}
+
+
+main{
+    background: $main-background;
+}
+
+footer{
+    background: $footer-background;
+}
+
+#about p{
+    font-size: $paragraph-font-size;
+} 
