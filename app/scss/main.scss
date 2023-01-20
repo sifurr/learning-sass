@@ -1,0 +1,59 @@
+// Partials
+@forward "./base/index"; 
+@use "./util/index";  
+
+// Mixin and Include
+@mixin para-style-education{
+    font-size: 18px;
+    text-align: justify;
+    font-style: italic;
+    color: blue;
+}
+
+@mixin para-style-about($size, $style){
+    font-size: $size;
+    text-align: $style;
+    font-style: italic;
+    color: green;
+}
+
+#about p{
+    @include para-style-about(10px, italic);
+    margin: 10px 0;
+}
+
+#education p{
+    @include para-style-education;
+    margin: 10px 0;
+}
+
+// this selector will be used for inheritance 
+.btn{
+    border: none;
+    padding: 15px 30px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+// Inheritance with @extend
+.btn-download{
+    @extend .btn;
+    background: aqua;
+}
+
+
+header{
+    background: index.$heaher-background; // use of partials
+    padding: 5rem;
+}
+
+main{
+    background: index.$main-background; // use of partials
+    padding: 5rem;
+}
+
+footer{
+    background: index.$footer-background; // use of partials
+}
+
