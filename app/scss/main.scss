@@ -1,6 +1,6 @@
 // Partials
 @forward "./base/index"; 
-@use "./util/index";  
+@use "./util/index";  // it enables to use variables
 
 // Mixin and Include
 @mixin para-style-education{
@@ -32,7 +32,6 @@
     border: none;
     padding: 15px 30px;
     text-align: center;
-    font-size: 16px;
     cursor: pointer;
 }
 
@@ -42,11 +41,62 @@
     background: aqua;
 }
 
+// conditionals
+@mixin setFontSize($value){
+
+    @if $value==small
+    {
+        font-size: 5px;
+        color: #fb5607;
+    }
+    @else if $value==medium
+    {
+        font-size: 18px;
+        color: green;
+    }
+    @else if $value==large
+    {
+        font-size: 25px;
+        color: blueviolet;
+    }
+    @else
+    {
+        font-size: none;
+    }
+}
+
 
 header{
     background: index.$heaher-background; // use of partials
     padding: 5rem;
 }
+
+nav{
+    margin-top: 20px;
+    ul{
+        list-style-type: none;
+        li{
+            display: inline-block;
+            margin: 0 15px;
+            a{
+                display: inline-block;
+                color: white;
+                text-decoration: none;
+                padding: 10px;
+                transition: 0.4s;
+                border-radius: 5px;
+
+                // use of conditionals with mixin
+                @include setFontSize(medium);
+            }
+
+            a:hover{
+                background: #fb5607;
+            }
+        }
+    }
+}
+
 
 main{
     background: index.$main-background; // use of partials
@@ -56,4 +106,63 @@ main{
 footer{
     background: index.$footer-background; // use of partials
 }
+
+
+// column layout using vanila CSS
+
+// .col-1 {width: 8.33%;}
+// .col-2 {width: 16.66%;}
+// .col-3 {width: 25%;}
+// .col-4 {width: 33%;}
+// .col-5 {width: 41%;}
+// .col-6 {width: 50%;}
+// .col-7 {width: 58%;}
+// .col-8 {width: 66.66%;}
+// .col-9 {width: 75%;}
+// .col-10 {width: 83%;}
+// .col-11 {width: 91%;}
+// .col-12 {width: 100%;}
+
+
+// column layout using vanila SASS [for loop]
+// @for $i from 1 through 12{
+//     .col-#{$i} {width: 100% / 12 * $i;}
+// } 
+
+
+// same column layout using vanila SASS [while loop]
+$i: 1;
+@while $i < 13{
+    .col-#{$i} {
+        width: 100% / 12 * $i;
+    }
+    $i: $i + 1;
+}
+
+// common for both css and sass
+
+[class*="col-"]{
+    float: left;
+}
+
+.row::after{
+    clear: both;
+    content: "";
+    display: table;
+}
+
+// map using each
+$colors: (color1:red, color2:green, color3: blue);
+@each $key, $color in $colors{
+        .#{$color}-text {
+            color: $color;
+        }
+    }
+
+
+// @each $color in red, green, blue{
+//     .#{$color}-text {
+//         color: $color;
+//     }
+// }
 
